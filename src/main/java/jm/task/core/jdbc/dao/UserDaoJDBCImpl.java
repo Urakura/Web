@@ -22,7 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     // Создание таблицы для User(ов) – не должно приводить к исключению, если такая таблица уже существует
     public void createUsersTable() {
-        try (Statement statement = conn.createStatement()) {
+        try (final Statement statement = conn.createStatement()) {
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS users " +
                     "(id BIGINT PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(45) NOT NULL, lastname VARCHAR(45) NOT NULL, age INT NOT NULL)");
         } catch (SQLException e) {
@@ -32,7 +32,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     // Удаление таблицы User(ов) – не должно приводить к исключению, если таблицы не существует
     public void dropUsersTable() {
-        try (Statement statement = conn.createStatement()) {
+        try (final Statement statement = conn.createStatement()) {
             statement.executeUpdate("DROP TABLE IF EXISTS users");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,8 +40,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     // Добавление User в таблицу
-    public void saveUser(String firstname, String lastname, byte age) {
-        try (PreparedStatement statement = conn.prepareStatement("INSERT INTO users (firstname, lastname, age) VALUES (?, ?, ?)")) {
+    public void saveUser(final String firstname, final String lastname, final byte age) {
+        try (final PreparedStatement statement = conn.prepareStatement("INSERT INTO users (firstname, lastname, age) VALUES (?, ?, ?)")) {
             statement.setString(1, firstname);
             statement.setString(2, lastname);
             statement.setByte(3, age);
@@ -53,10 +53,10 @@ public class UserDaoJDBCImpl implements UserDao {
 
     // Удаление User из таблицы ( по id )
     public void removeUserById(long id) {
-        try (PreparedStatement statement = conn.prepareStatement("DELETE FROM users WHERE id = ?")) {
+        try (final PreparedStatement statement = conn.prepareStatement("DELETE FROM users WHERE id = ?")) {
             statement.setLong(1, id);
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
     }

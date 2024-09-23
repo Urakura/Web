@@ -5,10 +5,6 @@ import jm.task.core.jdbc.model.User;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    public UserDaoHibernateImpl() {
-
-    }
-
 
     @Override
     public void createUsersTable() {
@@ -21,12 +17,12 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(String name, String lastName, byte age) {
+    public void saveUser(final String name, final String lastName, final byte age) {
 
     }
 
     @Override
-    public void removeUserById(long id) {
+    public void removeUserById(final long id) {
 
     }
 
